@@ -127,6 +127,15 @@ app.get("/students/branch/:branchName", (req, res) => {
   res.status(200).json(studentBranch);
 });
 
+app.get("/students/sem/:semester", (req,res)=>{
+  const studentSem =Number(req.params.semester);
+  const semStudent = students.find(s=>s.semester===studentSem);
+  if(!semStudent) {
+    return res.status(404).json({message: "Student not Found"});
+  }
+  res.status(200).json(semStudent);
+})
+
 app.listen(3000, () => {
   console.log("Server started on port 3000");
 });
